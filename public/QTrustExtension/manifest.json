@@ -1,0 +1,23 @@
+{
+    "manifest_version" : 3,
+    "name" : "QTrust Extension",
+    "version" : "1.0",
+    "description": "Detects Fake News on X using Quantum Machine Learning",
+
+    "permissions" : ["storage", "scripting", "tabs", "activeTab"],
+    "host_permissions" : ["https://x.com/*", "https://twitter.com/*"],
+
+    "action" : {
+        "default_popup" : "popup.html",
+        "default_title" : "QTrust"
+    },
+    "background" : {
+        "service_worker" : "background.js"
+    },
+    "content_scripts" : [
+        {
+            "matches" : ["https://x.com/*", "https://twitter.com/*"],
+            "js": ["content.js"]
+        }
+    ]
+}

@@ -1,0 +1,660 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  GLOBAL CSS
+*/
+@layer base {
+  :root {
+    /* Dark theme with improved indigo color scheme */
+    /* Educational Note: Background colors - from darkest to lighter grays */
+    --background: 222.2 84% 4.9%; /* Very dark blue-gray */
+    --foreground: 210 40% 98%; /* Almost white text */
+
+    /* Card backgrounds for content sections */
+    --card: 220 28% 8%; /* Slightly lighter than background */
+    --card-foreground: 210 40% 98%; /* White text on cards */
+
+    /* Popup/modal backgrounds */
+    --popover: 220 28% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary colors - enhanced indigo scheme */
+    /* Educational Note: These are our main brand colors */
+    --primary: 239 84% 67%; /* Bright indigo - main brand color */
+    --primary-foreground: 210 40% 98%; /* White text on primary buttons */
+
+    /* Secondary colors for less important elements */
+    --secondary: 220 20% 14%; /* Dark gray with slight blue tint */
+    --secondary-foreground: 210 40% 98%; /* White text on secondary elements */
+
+    /* Muted colors for subtle elements */
+    --muted: 220 15% 16%; /* Subtle background color */
+    --muted-foreground: 215 20.2% 65.1%; /* Gray text for less important info */
+
+    /* Accent colors for highlights and interactive elements */
+    --accent: 239 84% 67%; /* Same as primary for consistency */
+    --accent-foreground: 210 40% 98%;
+
+    /* Destructive/error colors */
+    --destructive: 0 62.8% 50%; /* Red for errors/warnings */
+    --destructive-foreground: 210 40% 98%;
+
+    /* Border and input styling */
+    --border: 220 20% 20%; /* Subtle borders */
+    --input: 220 20% 18%; /* Input field backgrounds */
+    --ring: 239 84% 67%; /* Focus ring color (indigo) */
+
+    /* Border radius for rounded corners */
+    --radius: 0.75rem; /* 12px rounded corners */
+
+    /* Sidebar specific colors (if needed) */
+    --sidebar-background: 220 28% 8%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 239 84% 67%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 14%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 239 84% 67%;
+  }
+}
+
+/* 
+  Educational Note: Base styles that apply to all elements
+  This section sets up fundamental styling for the entire app
+*/
+@layer base {
+  /* Universal box-sizing and border inheritance */
+  * {
+    @apply border-border;
+  }
+
+  /* Body styling - this affects the entire page */
+  body {
+    @apply bg-background text-foreground;
+    /* Font stack - tries Inter first, then falls back to system fonts */
+    font-family:
+      "Inter",
+      "Segoe UI",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    /* Smooth scrolling when clicking navbar links */
+    scroll-behavior: smooth;
+  }
+
+  /* HTML element styling */
+  html {
+    scroll-behavior: smooth;
+    /* Prevent horizontal scrolling */
+    overflow-x: hidden;
+  }
+}
+
+/* 
+  Educational Note: Utility classes
+  These are reusable classes for common styling patterns
+*/
+@layer utilities {
+  /* Glassmorphism effect - creates frosted glass appearance */
+  /* Educational Note: backdrop-blur creates the blur effect behind the element */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+    /* Additional shadow for depth */
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  }
+
+  /* Dark glassmorphism for better contrast */
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-lg border border-indigo-500/20;
+    /* Enhanced shadow with indigo tint */
+    box-shadow:
+      0 8px 32px rgba(31, 38, 135, 0.37),
+      0 0 0 1px rgba(99, 102, 241, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-secondary {
+    @apply glass-dark text-white font-semibold py-3 px-8 rounded-full 
+           transition-all duration-300 transform hover:scale-105 
+           hover:bg-white/10 border-indigo-400/30 hover:border-indigo-400/50;
+  }
+
+  /* Input field styling */
+  .input-field {
+    @apply w-full bg-gray-800/50 border border-indigo-500/20 rounded-lg 
+           px-4 py-3 text-white placeholder-gray-400 
+           focus:border-indigo-500 focus:outline-none focus:ring-2 
+           focus:ring-indigo-500/20 transition-all duration-200
+           backdrop-blur-sm;
+  }
+
+  /* Card styling for consistent content blocks */
+  .content-card {
+    @apply glass-dark p-8 rounded-2xl 
+           hover:bg-white/5 transition-all duration-300
+           border-indigo-500/10 hover:border-indigo-500/20;
+  }
+
+  /* Animation for smooth page transitions */
+  .fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+
+  /* Text gradient effect for headings */
+  .text-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-r 
+           from-indigo-400 via-purple-400 to-indigo-400;
+  }
+
+  /* Enhanced status indicators */
+  .status-verified {
+    @apply bg-green-900/30 text-green-300 border border-green-500/30
+           px-3 py-1 rounded-full text-xs font-semibold
+           backdrop-blur-sm;
+  }
+
+  .status-flagged {
+    @apply bg-red-900/30 text-red-300 border border-red-500/30
+           px-3 py-1 rounded-full text-xs font-semibold
+           backdrop-blur-sm;
+  }
+
+  /* Loading animation */
+  .loading-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+/* 
+  Educational Note: Custom Animations
+  These create smooth, professional motion effects
+*/
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* 
+  Educational Note: Responsive Design Utilities
+  These ensure the app looks good on all screen sizes
+*/
+@media (max-width: 768px) {
+  .mobile-padding {
+    @apply px-4;
+  }
+
+  .mobile-text {
+    @apply text-sm;
+  }
+}
+
+/* 
+  Educational Note: Accessibility Improvements
+  These help users with disabilities navigate the app
+*/
+.focus-visible {
+  @apply focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* These below CSS Styling are focus on the Transaction History Components */
+
+@layer utilities {
+  /* Modified content card with subtle hover */
+  .content-card {
+    @apply bg-gray-800/40
+    border border-gray-700/50
+    rounded-2xl p-8
+    transition-all duration-300;
+  }
+
+  /* Subtle hover effect for content cards */
+  .content-card:hover {
+    @apply bg-gray-800/50
+    border-indigo-500/20
+    shadow-lg;
+  }
+}
+
+@layer utilities {
+  /* Simplified input field hover */
+  .input-field {
+    @apply bg-gray-800/50
+    border border-gray-700/50
+    rounded-lg px-4 py-3
+    text-white
+    transition-all duration-200;
+  }
+
+  .input-field:hover {
+    @apply bg-gray-800/60
+    border-gray-600/50;
+  }
+
+  .input-field:focus {
+    @apply border-indigo-500/50
+    outline-none;
+  }
+}
+
+/* ===================
+   BUTTON
+   =================== */
+/* Button Primary */
+.btn-primary {
+  background-color: linear-gradient(
+    135deg,
+    rgb(57, 8, 99) 0%,
+    rgb(36, 5, 51) 100%
+  );
+  color: rgb(41, 3, 58);
+  position: relative;
+  padding: 30px 30px;
+  border-radius: 50px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.5s;
+}
+.btn-primary span {
+  position: relative;
+  z-index: 1;
+  color: #1f0335;
+}
+
+/* Hover state */
+.btn-primary:hover {
+  color: #a50fe6;
+  text-shadow: #1f0335;
+  transform: translateX(3px);
+}
+
+/* Mouse-follow glowing circle */
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(#ffffff, #ffffff, transparent, transparent);
+  opacity: 0;
+  transition:
+    0.5s,
+    top 0s,
+    left 0s;
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+/* Inner background layer */
+.btn-primary::after {
+  content: "";
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.625) 0%,
+    rgba(147, 81, 208, 0.905) 100%
+  );
+  position: absolute;
+  inset: 3px;
+  border-radius: 48px;
+  z-index: 0;
+}
+
+/* Icon styling */
+.btn-primary .btn-icon {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.btn-primary:hover .btn-icon {
+  transform: translateX(-3px);
+}
+
+/* Button Secondary */
+.btn-secondary {
+  /* Glass morphism background */
+  background: Linear-gradient(#b7b1bb30, transparent, transparent, #b7b1bb33);
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(5px);
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 25px 30px;
+  border-radius: 50px;
+  border: 1px solid rgba(163, 99, 241, 0.5); /* border-indigo-400/30 */
+  transition: all 0.3s ease; /* duration-300 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-secondary span {
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.1rem;
+}
+.btn-secondary:hover {
+  /* Scale transform */
+  transform: scale(1.05); /* hover:scale-105 */
+
+  /* Background on hover */
+  /* background: rgba(255, 255, 255, 0.1); */
+  background: Linear-gradient(#bda8ca63, #d8bfe717, #d8bfe717, #b09fbb76);
+
+  /* Border on hover */
+  border-color: rgba(163, 99, 241, 0.5); /* hover:border-indigo-400/50 */
+}
+
+/* Active state (optional) */
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* Focus state (accessibility) */
+.btn-secondary:focus {
+  outline: 2px solid rgba(163, 99, 241, 0.5);
+  outline-offset: 2px;
+}
+.container {
+  max-width: 1270px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.container-1 {
+  max-width: 2270px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+.brand-text {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-text-1 {
+  /* Animated gradient */
+  /* background: linear-gradient(
+    120deg,
+    #ffffff 0%,
+    hsl(0, 0%, 100%) 20%,
+    #d0b1ef 40%,
+    #c53bc1 60%,
+    #51088d 65%,
+    #a57fc8 70%,
+    #ffffff 100%
+  ); */
+  background: linear-gradient(
+    100deg,
+    #b968e5 0%,
+    #b968e5 40%,
+    #c1a7ce 60%,
+    #ffffff 65%,
+    #c1a7ce 80%,
+    #b968e5 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  /* Flowing animation */
+  animation: gradient-flow 2s linear infinite;
+
+  /* Text shadow for extra glow */
+  filter: drop-shadow(2px 0 0 rgb(255, 255, 255));
+}
+
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+/* Shared label style */
+.qa-label {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6426b5;
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.qa-label::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: #6426b5;
+}
+/* Shared label style */
+.qa-label1 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #bca3de;
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.qa-label1::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: #bca3de;
+}
+
+.section-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.875rem;
+  }
+}
+
+/* ===================
+   FOOTER
+   =================== */
+/* ===================
+   FOOTER
+   =================== */
+.footer {
+  background: #04060f;
+  color: white;
+  padding: 5rem 0 0;
+  margin-top: auto;
+  border-top: 1px solid rgba(147, 51, 234, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(147, 51, 234, 0.06) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(74, 158, 255, 0.04) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.footer .container {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  align-items: flex-start;
+  padding-bottom: 4rem;
+}
+
+@media (max-width: 1023px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+.footer-brand {
+  grid-column: span 1;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.footer-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.footer-logo span {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.75;
+  max-width: 400px;
+}
+
+.footer-heading {
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 1.25rem;
+}
+
+.footer-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-link {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #a855f7;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.75rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.footer-copyright {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.footer-tagline {
+  font-size: 1rem;
+  color: rgba(168, 85, 247, 0.4);
+  letter-spacing: 0.06em;
+}

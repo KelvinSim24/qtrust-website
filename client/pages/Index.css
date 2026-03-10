@@ -1,0 +1,1168 @@
+/* ========================================
+   INDEX.CSS — Download page specific styles
+   Reuses globals: .qa-label, .section-title, .brand-text,
+   .btn-primary, .btn-secondary, .container, .px-impact-card,
+   .px-impact-grid, .px-impact-card-body, .px-impact-card-index,
+   .px-impact-card-title, .px-impact-card-description,
+   .px-impact-card-tags, .px-tag, .px-features-header,
+   .px-section-subtitle, .px-feature-title, .px-feature-description,
+   .px-impact-card-index, .vm-accent-purple,
+   .homepage-stat-number, .homepage-stat-label, .homepage-stat-item
+   ======================================== */
+
+/* ===================
+   PAGE SHELL
+   =================== */
+.idx-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===================
+   HERO
+   Matches proximax-hero / about-hero pattern exactly
+   =================== */
+.idx-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.idx-hero-overlay {
+  position: absolute;
+  inset: 0;
+  /* background: rgba(92, 0, 153, 0.332); */
+  background: linear-gradient(
+    180deg,
+    #29104a 0%,
+    rgba(50, 27, 81, 0.407) 50%,
+    #c392ed72 80%,
+    #dac4eca2 100%
+  );
+}
+
+.idx-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+}
+
+.idx-hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1270px;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.idx-hero-text {
+  text-align: center;
+}
+
+.idx-hero-title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .idx-hero-title {
+    font-size: 2.5rem;
+  }
+}
+
+.idx-hero-subtitle {
+  font-size: 1.375rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 48rem;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.idx-hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .idx-hero-buttons {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+
+.idx-hero-buttons .btn-primary,
+.idx-hero-buttons .btn-secondary {
+  min-width: 180px;
+  height: 50px;
+  white-space: nowrap;
+}
+
+/* Download loading state */
+.idx-btn--loading {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+/* Center all content inside the download button */
+.idx-hero-buttons .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.idx-hero-buttons .btn-primary span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.idx-btn-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.idx-spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  animation: idx-spin 1s linear infinite;
+}
+
+@keyframes idx-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.idx-spinner-track {
+  opacity: 0.25;
+}
+.idx-spinner-fill {
+  opacity: 0.75;
+}
+
+/* Scroll-down CTA at bottom of hero */
+.idx-scroll-cta {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.3s ease;
+}
+
+.idx-scroll-cta:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.idx-scroll-cta-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.idx-scroll-cta-arrow {
+  animation: idx-bounce 1.6s ease-in-out infinite;
+  display: flex;
+}
+
+@keyframes idx-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* Toast notification */
+.idx-toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: #15803d;
+  border: 1px solid #22c55e;
+  color: #ffffff;
+  padding: 0.85rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 200;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* ===================
+   INSTALLATION GUIDE
+   Matches px-features section (dark #080312 bg + radial glows)
+   =================== */
+.idx-install {
+  background: #080312;
+  padding: 10rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.idx-install::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(74, 158, 255, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(147, 51, 234, 0.06) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.idx-install-header {
+  margin-bottom: 3rem;
+}
+
+.idx-progress-count {
+  color: #a855f7;
+  font-weight: 700;
+}
+
+/* Install grid — 2 col: steps nav + detail panel */
+.idx-install-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+@media (max-width: 1023px) {
+  .idx-install-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* ── Steps nav ── */
+.idx-steps-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.idx-step-row {
+  border-left: 3px solid rgba(255, 255, 255, 0.07);
+  transition: border-color 0.3s ease;
+}
+
+.idx-step-row--active {
+  border-color: #6426b5;
+}
+.idx-step-row--done {
+  border-color: #22c55e;
+}
+
+.idx-step-btn {
+  width: 100%;
+  text-align: left;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 10px 10px 0;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: none;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.idx-step-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+.idx-step-btn--active {
+  background: rgba(100, 38, 181, 0.12);
+}
+
+.idx-step-btn-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.idx-step-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Step number — styled like px-impact-card-index */
+.idx-step-num {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+  min-width: 28px;
+  transition: color 0.25s ease;
+}
+
+.idx-step-num--active {
+  color: #6426b5;
+}
+.idx-step-num--done {
+  color: #22c55e;
+}
+
+.idx-step-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+  transition: color 0.25s ease;
+}
+
+.idx-step-btn--active .idx-step-label {
+  color: #ffffff;
+}
+
+/* Checkbox */
+.idx-check {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 4px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  color: #ffffff;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.idx-check:hover {
+  border-color: #4ade80;
+}
+.idx-check--done {
+  background: #22c55e;
+  border-color: #22c55e;
+}
+
+/* ── Detail panel — frosted glass (matches px-impact-card) ── */
+.idx-detail-panel {
+  background: rgba(42, 1, 52, 0.27);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  /* border: 1px solid rgba(255, 255, 255, 0.09); */
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 2rem;
+  position: sticky;
+  top: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.idx-detail-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.idx-detail-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.05em;
+}
+.idx-feature-description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.8;
+  margin-top: 0.85rem;
+}
+
+/* Code block */
+.idx-code-block {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.idx-code {
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 0.82rem;
+  color: #4ade80;
+  letter-spacing: 0.03em;
+}
+
+/* Points */
+.idx-points-title {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 0.75rem;
+}
+
+.idx-point-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.idx-point-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+}
+
+/* Action buttons in detail panel */
+.idx-detail-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Prev / Next — text only, no border, no bg */
+.idx-nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  padding: 0.4rem 0;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.idx-nav-btn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #a855f7;
+  transition: width 0.25s ease;
+}
+
+.idx-nav-btn:hover {
+  color: #ffffff;
+}
+
+.idx-nav-btn:hover::after {
+  width: 100%;
+}
+
+/* Next gets a purple tint to distinguish from Prev */
+.idx-nav-btn--next {
+  color: rgba(168, 85, 247, 0.7);
+}
+
+.idx-nav-btn--next:hover {
+  color: #a855f7;
+}
+
+/* Complete button */
+.idx-complete-btn {
+  margin-left: auto;
+  padding: 0.45rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  /* border: 1px solid rgba(255, 255, 255, 0.1); */
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.idx-complete-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  /* border-color: rgba(255, 255, 255, 0.2); */
+}
+
+.idx-complete-btn--done {
+  background: rgba(34, 197, 94, 0.12);
+  /* border-color: rgba(74, 222, 128, 0.25); */
+  color: #4ade80;
+}
+
+.idx-complete-btn--done:hover {
+  background: rgba(34, 197, 94, 0.2);
+  /* border-color: rgba(74, 222, 128, 0.4); */
+}
+
+/* ── Troubleshooting ── */
+.idx-troubleshoot {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.idx-troubleshoot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .idx-troubleshoot-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.idx-trouble-card {
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    #171020 0%,
+    #1c0f2b 200%,
+    #241930 50%,
+    #201a2e 100%
+  );
+  transition: border-color 0.3s ease;
+}
+
+.idx-trouble-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.idx-trouble-list li {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.idx-trouble-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #6426b5;
+  font-size: 0.75rem;
+}
+
+/* ===================
+   GLOW CARD — shared by detail panel, trouble cards, feature cards
+   =================== */
+/* .idx-glow-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+} */
+
+/* .idx-glow-card::before {
+  content: "";
+  position: absolute;
+  top: var(--gy, -999px);
+  left: var(--gx, -999px);
+  width: 320px;
+  height: 320px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle closest-side,
+    rgba(147, 51, 234, 0.18),
+    rgba(74, 158, 255, 0.08),
+    transparent
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+} */
+
+/* .idx-glow-card:hover::before {
+  opacity: 1;
+} */
+
+/* .idx-glow-card:hover {
+  border-color: rgba(147, 51, 234, 0.3);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(147, 51, 234, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px);
+} */
+
+/* All children sit above the glow layer */
+/* .idx-glow-card > * {
+  position: relative;
+  z-index: 1;
+} */
+
+/* Button Primary */
+/* .idx-glow-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  color: rgb(41, 3, 58);
+  position: relative;
+  padding: 30px 30px;
+  border-radius: 20px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-decoration: none;
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.35s ease;
+} */
+
+/* Mouse-follow glowing circle */
+/* .idx-glow-card::before {
+  content: "";
+  position: absolute;
+  top: var(--gy);
+  left: var(--gx);
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(#ffffff, #ffffff, transparent, transparent);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+
+.idx-glow-card:hover::before {
+  opacity: 1;
+} */
+
+/* Inner background layer */
+/* .idx-glow-card::after {
+  content: "";
+  background: rgb(0, 0, 0);
+  position: absolute;
+  inset: 3px;
+  border-radius: 18px;
+  z-index: 0;
+} */
+
+@property --idx-card-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes idx-card-spin {
+  to {
+    --idx-card-angle: 360deg;
+  }
+}
+
+.idx-glow-card {
+  position: relative;
+  border-radius: 20px;
+}
+
+/* Spinning conic border */
+.idx-glow-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: conic-gradient(
+    from var(--idx-card-angle, 0deg),
+    transparent 0deg,
+    transparent 60deg,
+    rgba(255, 255, 255, 0.85) 90deg,
+    rgba(210, 170, 255, 0.65) 120deg,
+    rgba(147, 51, 234, 0.45) 150deg,
+    transparent 180deg,
+    transparent 360deg
+  );
+  z-index: 0;
+  animation: idx-card-spin 5s linear infinite;
+  pointer-events: none;
+}
+
+/* Solid fill — covers the conic gradient, only the 2px rim shows as border */
+.idx-glow-card-bg {
+  position: absolute;
+  inset: 1px;
+  border-radius: 19px;
+  /* background: #272629; */
+  background: linear-gradient(
+    135deg,
+    #171020 0%,
+    #1c0f2b 200%,
+    #241930 50%,
+    #201a2e 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Content sits above both layers */
+.idx-glow-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+  border-radius: 19px;
+  backdrop-filter: blur(12px);
+}
+/* ===================
+   INSTALLATION GUIDE — progress bar
+   =================== */
+.idx-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  max-width: 380px;
+}
+
+.idx-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.idx-progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #6426b5, #a855f7);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+.idx-progress-label {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+}
+
+.idx-progress-count {
+  color: #a855f7;
+  font-weight: 700;
+}
+
+/* Detail panel — overrides frosted base for sticky positioning */
+.idx-detail-panel {
+  padding: 2rem;
+  position: sticky;
+  top: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.idx-detail-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.idx-detail-status {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Trouble cards */
+.idx-trouble-card {
+  cursor: default;
+}
+
+.idx-trouble-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.idx-trouble-list li {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.6;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.idx-trouble-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.72rem;
+  top: 0.15em;
+}
+/* ===================
+   FEATURES
+   Matches px-impact section (purple gradient bg)
+   =================== */
+.idx-feature-card {
+  position: relative;
+  border-radius: 20px;
+  cursor: default;
+  display: flex; /* add this */
+  flex-direction: column; /* add this */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.205);
+}
+
+/* Mouse-follow glow border — same mechanic as btn-primary */
+.idx-feature-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: radial-gradient(
+    350px circle at var(--fx, -999px) var(--fy, -999px),
+    rgba(255, 255, 255, 0.716),
+    rgba(185, 116, 250, 0.35),
+    transparent 70%
+  );
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Dark mask — covers the glow except for the 2px rim */
+.idx-feature-card-bg {
+  position: absolute;
+  inset: 2px;
+  border-radius: 18px;
+  /* background: #1c012dfc; */
+  background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop");
+  background-size: cover;
+  background-position: center;
+  /* opacity: 0.5; */
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Content sits above both layers */
+.idx-feature-card-content {
+  position: relative;
+  gap: 1rem;
+  display: grid;
+  z-index: 2;
+  padding: 1.75rem;
+  border-radius: 18px;
+  flex: 1; /* add this — stretches to fill card height */
+  background: linear-gradient(
+    135deg,
+    rgba(47, 1, 88, 0.405) 0%,
+    rgba(52, 30, 76, 0.426) 50%,
+    rgba(44, 5, 78, 0.204) 100%
+  );
+
+  backdrop-filter: blur(12px);
+}
+
+.idx-features {
+  background: linear-gradient(135deg, #29163e 0%, #190f23 50%, #241a2e 100%);
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.idx-features::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 70% 20%,
+      rgba(147, 51, 234, 0.12) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 30% 80%,
+      rgba(59, 130, 246, 0.08) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.idx-features .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Feature card icon */
+.idx-feat-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+/* Tech specs row — matches homepage-stats pattern */
+.idx-specs-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 4rem;
+}
+
+@media (max-width: 640px) {
+  .idx-specs-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.idx-spec-item {
+  text-align: center;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+/* ===================
+   FAQ SECTION
+   =================== */
+.idx-faq {
+  background: #080312;
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.idx-faq::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 10% 50%,
+      rgba(147, 51, 234, 0.06) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 90% 50%,
+      rgba(74, 158, 255, 0.04) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+.idx-faq-header {
+  margin-bottom: 4rem;
+}
+
+.idx-faq-list {
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.idx-faq-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.idx-faq-item:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.idx-faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.75rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+}
+
+.idx-faq-question:hover {
+  color: #ffffff;
+}
+
+.idx-faq-item--open .idx-faq-question {
+  color: #ffffff;
+}
+
+.idx-faq-icon {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: #6426b5;
+  flex-shrink: 0;
+  line-height: 1;
+  transition:
+    transform 0.3s ease,
+    color 0.2s ease;
+}
+
+.idx-faq-item--open .idx-faq-icon {
+  color: #a855f7;
+  transform: rotate(180deg);
+}
+
+.idx-faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.4s ease,
+    padding 0.3s ease;
+}
+
+.idx-faq-item--open .idx-faq-answer {
+  max-height: 200px;
+  padding-bottom: 1.75rem;
+}
+
+.idx-faq-answer p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.8;
+}
+
+.idx-faq-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+@media (max-width: 1023px) {
+  .idx-faq-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+.idx-faq-inner-1 {
+  display: block;
+  align-items: start;
+}
+@media (max-width: 1023px) {
+  .idx-faq-inner-1 {
+    /* grid-template-columns: 1fr; */
+    gap: 3rem;
+  }
+}
+
+.idx-faq-inner1 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+@media (max-width: 1023px) {
+  .idx-faq-inner1 {
+    grid-template-columns: 1fr;
+    gap: 8rem;
+  }
+}
+
+.idx-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.idx-faq-image {
+  position: sticky;
+  top: 6rem;
+  background-image: url("../lib/faq-img.png");
+  background-size: cover;
+  background-position: center;
+  min-height: 600px;
+  border-radius: 20px;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+@media (max-width: 1023px) {
+  .idx-faq-image {
+    max-height: 100px;
+  }
+}
+.idx-faq-image:hover {
+  opacity: 1;
+}
+
+/* Subtle glow behind image */
+.idx-faq-image::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(
+    circle,
+    rgba(147, 51, 234, 0.15) 0%,
+    transparent 70%
+  );
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(20px);
+}
