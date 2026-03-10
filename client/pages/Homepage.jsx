@@ -5,6 +5,8 @@ import "./Homepage.css"; // Homepage-specific styles
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import LogoImg from "../lib/qtrust-logo.png";
+import Img1 from "../lib/img-1.png";
+import HomepageBg1 from "../lib/homepage-bg-1.mp4";
 
 const Homepage = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -54,7 +56,7 @@ const Homepage = () => {
             playsInline
             // poster="/path/to/poster-image.jpg"
           >
-            <source src="client\lib\homepage-bg-1.mp4" type="video/mp4" />
+            <source src={HomepageBg1} type="video/mp4" />
           </video>
         </div>
 
@@ -162,7 +164,7 @@ const Homepage = () => {
             {/* Right Side - Text Content */}
             <div className="homepage-about-image">
               <img
-                src="client\lib\img-1.png"
+                src={Img1}
                 alt="About QTrust - Quantum AI Fake News Detection Platform"
               />
             </div>

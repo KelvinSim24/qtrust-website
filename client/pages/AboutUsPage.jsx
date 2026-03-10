@@ -11,6 +11,7 @@ import WongHeeSoonImage from "../lib/Wong Hee Soon.png";
 import OoiXianBiaoImage from "../lib/Ooi Xian Biao.png";
 import TeeWeeJingImage from "../lib/Tee Wei Jing.png";
 import LogoImg from "../lib/qtrust-logo.png";
+import Img2 from "../lib/img-2.png";
 
 const AboutUsPage = () => {
   const trackRef = useRef(null);
@@ -136,7 +137,7 @@ const AboutUsPage = () => {
 
             <div className="about-intro-image">
               <img
-                src="client\lib\img-2.png"
+                src={Img2}
                 alt="About QTrust - Quantum AI Fake News Detection Platform"
               />
             </div>
