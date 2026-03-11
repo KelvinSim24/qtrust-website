@@ -14,6 +14,19 @@
   status = 200
   force = true
 
+# ✅ Serve ZIP file directly — must be BEFORE the SPA catch-all below
+[[redirects]]
+  from = "/QTrustExtension.zip"
+  to = "/QTrustExtension.zip"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/QTrustExtension.zip"
+  [headers.values]
+    Content-Type = "application/zip"
+    Content-Disposition = "attachment; filename=QTrustExtension.zip"
+
 # SPA fallback — THIS FIXES PAGE RELOAD 404 FOR ALL REACT ROUTER ROUTES
 # This MUST be the last redirect rule
 [[redirects]]
