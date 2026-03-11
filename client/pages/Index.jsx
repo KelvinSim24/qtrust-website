@@ -27,7 +27,7 @@ const Hero = () => {
   const handleDownload = async () => {
     setIsDownloading(true);
     try {
-      const response = await fetch("/QTrust-Extension.zip");
+      const response = await fetch("/QTrustExtension.zip");
       if (!response.ok) throw new Error("Download failed");
 
       const blob = await response.blob();
